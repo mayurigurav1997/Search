@@ -110,9 +110,11 @@ btn1.addEventListener("click",(ev) => {
         let td2 = tr[i].getElementsByTagName("td")[1];
         let td3 = tr[i].getElementsByTagName("td")[2];
         // console.log(td);
-        if(td1){
-            let textvalue = td1.textContent || td1.innerHTML;
-            if(textvalue == filter){
+        if(td1 || td2 ||td3){
+            let textvalue1 = td1.textContent || td1.innerHTML;
+            let textvalue2 = td2.textContent || td2.innerHTML;
+            let textvalue3 = td3.textContent || td3.innerHTML;
+            if(textvalue1 == filter || textvalue2 == filter || textvalue3 == filter){
                 alert(`
                 Name:${td1.textContent}
                 Gender:${td2.textContent}
