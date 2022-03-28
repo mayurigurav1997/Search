@@ -5,57 +5,128 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table{
+            margin:20px;
+            width:300px;
+            height:200px;
+        }
+        table,td,th{
+            border:1px solid black;
+            border-collapse: collapse;
+            background-color:cyan;
+
+        }
+        form{
+            border:1px solid black;
+            width:300px;
+            background-color:rgb(149, 250, 199);
+        }
+        #Input{
+            margin:10px;
+            padding:8px;
+
+        }
+        button{
+            margin:10px;
+
+        }
+    </style>
 </head>
 <body>
-    
 
+    <form>
+        <input type="text" id="Input" placeholder="Enter the Name"><br>
+    <button id="btn1">Submit</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody id="table_body">
+
+        </tbody>
+    </table>
     <script>
-        const url = "https://6240231e0adaf66ad74a3dc5.mockapi.io/Mayuri/friends/";
+        const data = [
+  {
+    name: "suman",
+    gender: "male",
+    age: 38,
+  },
+  {
+    name: "nitin",
+    gender: "male",
+    age: 32,
+  },
+  {
+    name: "tanushree",
+    gender: "female",
+    age: 40,
+  },
+  {
+    name: "krishna",
+    gender: "female",
+    age: 28,
+  },
+  {
+    name: "iqbal",
+    gender: "male",
+    age: 18,
+  },
+  {
+    name: "swetha",
+    gender: "female",
+    age: 39,
+  },
+];
+let table_body = document.getElementById("table_body");
+let tabledata = "";
+let Input = document.getElementById("Input")
+let Name = document.getElementById("Name");
+let Gender = document.getElementById("Gender");
+let Age = document.getElementById("Age");
+let btn1 = document.getElementById("btn1");
 
-        //fetch data from Server
-        // fetch(url)
-        // .then((response) => response.json())
-        // .then((data) => console.log(JSON.stringify(data)));
+data.map((values) => {
+    tabledata += `<tr><td>${values.name}</td>
+        <td>${values.gender}</td>
+        <td>${values.age}</td> </tr>`;
+})
+document.getElementById("table_body").innerHTML = tabledata;
+
+btn1.addEventListener("click",(ev) => {
+    ev.preventDefault();
+    let filter = Input.value;
+    let tr = table_body.getElementsByTagName("tr");
+    console.log(tr);
+
+    for(let i=0; i<tr.length; i++){
+        let td1 = tr[i].getElementsByTagName("td")[0];
+        let td2 = tr[i].getElementsByTagName("td")[1];
+        let td3 = tr[i].getElementsByTagName("td")[2];
+        // console.log(td);
+        if(td1){
+            let textvalue = td1.textContent || td1.innerHTML;
+            if(textvalue == filter){
+                alert(`
+                Name:${td1.textContent}
+                Gender:${td2.textContent}
+                Age${td3.textContent}`)
+            }
+        }
+    }
+})
 
 
-        //insert the data 
-        // const data = {name:"Mayuri" , country:"India" , pics:"example.com"};
 
-        // fetch(url,{
-        //     method:"POST",
-        //     headers:{
-        //         "Content-Type":"application/json",
-        //     },
-        //     body:JSON.stringify(data)
-        // }).then((response) => response.json())
-        // .then((data) => {
-        //     console.log(data);
-        // }).catch((error) => {
-        //     console.log("error: ",error);
-        // });
+// let result = data.filter((data) => data.name == "suman");
 
-        //update the data 
-        // const url1 = "https://6240231e0adaf66ad74a3dc5.mockapi.io/Mayuri/friends/5";
-
-        // const data1 = {name:"Prathmesh", country:"Austrillia" ,pics:"example2.com"};
-
-        // fetch(url1,{
-        //     method:"PUT",
-        //     headers:{
-        //         "Content-Type":"application/json",
-        //     },
-        //     body:JSON.stringify(data1)
-        // }).then((response) => response.json())
-        // .then(data => console.log("data is updated"));
-
-        //delete the data 
-        const url3 = "https://6240231e0adaf66ad74a3dc5.mockapi.io/Mayuri/friends/11";
-
-        fetch(url3,{
-            method:"DELETE"
-        }).then(console.log("Data is deleted"));
-
-
+// first.innerHTML=JSON.stringify(result)
     </script>
 </body>
 </html>
